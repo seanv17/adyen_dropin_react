@@ -35,10 +35,7 @@ class App extends Component {
       .then((json) => { 
         this.setState({ response: json.paymentMethods });
       })
-      .catch((error) => console.error(error))
-      .finally(() => {
-        this.setState({ isLoading: false });
-      });
+      .catch((error) => console.error(error));
   }
 
   render() {
