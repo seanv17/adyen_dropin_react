@@ -33,12 +33,12 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((json) => { 
-        this.setState({ paymentMethods: json.paymentMethods });
+        this.setState({ response: json.paymentMethods });
       })
-      .catch((error) => console.error(error));
-    // .finally(() => {
-    //   this.setState({ isLoading: false });
-    // });
+      .catch((error) => console.error(error))
+      .finally(() => {
+        this.setState({ isLoading: false });
+      });
   }
 
   render() {
