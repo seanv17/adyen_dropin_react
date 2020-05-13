@@ -21,7 +21,7 @@ class App extends Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-API-key': API_KEY
+        'x-API-key': API_KEY  
       },
       body: JSON.stringify({
         "merchantAccount": MERCHANT_ACCOUNT,
@@ -45,22 +45,18 @@ class App extends Component {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/3.7.0/adyen.css';
-    // link.integrity = 'sha384-y1lKqffK5z+ENzddmGIfP3bcMRobxkjDt/9lyPAvV9H3JXbJYxCSD6L8TdyRMCGM';
-    // link.crossorigin = 'anonymous';
     document.head.appendChild(link);
 
     const script = document.createElement('script');
     script.src = 'https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/3.7.0/adyen.js';
     script.async = true;
-    // script.integrity = 'sha384-aRaL1/W2ASAwZpEWmiHJJAhcc5h+pwDywrocWjla8oCSJaMlY4MC2hOPvAaOcOCq';
-    // script.crossorigin = 'anonymous';
     script.onload = this.initAdyenCheckout; // Wait until the script is loaded before initiating AdyenCheckout
     document.body.appendChild(script);
   }
 
   initAdyenCheckout() {
     const configuration = {
-      locale: 'en_US',
+      locale: 'en-US',
       environment: 'test',
       originKey: API_KEY,
       paymentMethodsResponse: paymentMethodsSample,
@@ -68,14 +64,24 @@ class App extends Component {
         value: 1000,
         currency: "USD"
       }
-  };
+    };
+    
+    const state = {
+      isValid: true,
+      data: {
+        paymentMethod: {
+          type: "scheme",
+          encryptedCardNumber: "adyenjs_0_1_18$k7s65M5V0KdPxTErhBIPoMPI8HlC..",
+          encryptedExpiryMonth: "adyenjs_0_1_18$p2OZxW2XmwAA8C1Avxm3G9UB6e4..",
+          encryptedExpiryYear: "adyenjs_0_1_18$CkCOLYZsdqpxGjrALWHj3QoGHqe+..",
+          encryptedSecurityCode: "adyenjs_0_1_18$XUyMJyHebrra/TpSda9fha978+..",
+          holderName: "S. Hopper"
+        }
+      }
+    };
 
-  // You can add AdyenCheckout to your list of globals and then delete the window reference:
-    // const checkout = new AdyenCheckout(configuration);
     const checkout = new window.AdyenCheckout(configuration);
 
-    // If you need to refer to the dropin externaly, you can save this inside a variable:
-    // const dropin = checkout.create...
     checkout
       .create("dropin", {
         onSubmit: (state, dropin) => {
@@ -90,7 +96,6 @@ class App extends Component {
   }
 
   render() {
-    // const { data, isLoading } = this.state;
 
     return (
       <div className="App">
