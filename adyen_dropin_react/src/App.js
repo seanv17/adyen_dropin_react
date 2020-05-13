@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import paymentMethodsSample from './paymentMethodsSample.json';
 import './styles.css';
 
-const API_KEY = 'AQEyhmfxK4zJbBZDw0m/n3Q5qf3VaY9UCJ1+XWZe9W27jmlZiniYHPZ+YtXG9dYfNdwN0H8QwV1bDb7kfNy1WIxIIkxgBw==-uA2G0DS73SlmB4EHi/YNndhli7KlCMjXHbMmm8stboc=-djvcdM2gNHq9dSvC';
 const MERCHANT_ACCOUNT = 'TestAccountNY';
+const API_KEY = 'AQEyhmfxK4zJbBZDw0m/n3Q5qf3VaY9UCJ1+XWZe9W27jmlZiniYHPZ+YtXG9dYfNdwN0H8QwV1bDb7kfNy1WIxIIkxgBw==-uA2G0DS73SlmB4EHi/YNndhli7KlCMjXHbMmm8stboc=-djvcdM2gNHq9dSvC';
 
 class App extends Component {
   constructor(props) {
@@ -17,21 +17,17 @@ class App extends Component {
   }
 
   getPaymentMethods() {
-    fetch('https://checkout-test.adyen.com/v52/paymentMethods', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-API-key': API_KEY  
-      },
-      body: JSON.stringify({
-        "merchantAccount": MERCHANT_ACCOUNT,
-        "countryCode": "US",
-        "shopperLocale": "en-US",
-        "amount": {
-          "currency": "USD",
-          "value": 1000
-        }
-      })
+    fetch('/paymentMethods', {
+      // method: 'GET',
+      // body: JSON.stringify({
+      //   "merchantAccount": MERCHANT_ACCOUNT,
+      //   "countryCode": "US",
+      //   "shopperLocale": "en-US",
+      //   "amount": {
+      //     "currency": "USD",
+      //     "value": 1000
+      //   }
+      // })
     }
     )
       .then((response) => response.json())
